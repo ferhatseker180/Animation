@@ -1,5 +1,6 @@
 package com.example.animasyongiris
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,7 +24,9 @@ class MainActivity : AppCompatActivity() {
            // scaleAnimasyonu()
           //  rotateAnimasyonu()
          //   translationAnimasyonu()
-            animasyonOzellikler()
+          //  animasyonOzellikler()
+          //  cokluAnimasyon()
+            ardisikAnimasyon()
         }
     }
         fun alphaAnimasyonu() {
@@ -117,6 +120,32 @@ class MainActivity : AppCompatActivity() {
         tekrar.start()
 
         }
+
+    fun cokluAnimasyon() {
+
+        val a  = ObjectAnimator.ofFloat(imageView,"alpha",1.0f,0.0f)
+        val sX  = ObjectAnimator.ofFloat(imageView,"scaleX",1.0f,2.0f)
+        val sY  = ObjectAnimator.ofFloat(imageView,"scaleY",1.0f,3.0f)
+
+        val coklu  = AnimatorSet().apply {
+            duration = 2000
+            playTogether(a,sX,sY)
+        }
+        coklu.start()
+    }
+
+    fun ardisikAnimasyon() {
+
+        val a  = ObjectAnimator.ofFloat(imageView,"alpha",0.0f,1.0f)
+        val sX  = ObjectAnimator.ofFloat(imageView,"scaleX",1.0f,2.0f)
+        val sY  = ObjectAnimator.ofFloat(imageView,"scaleY",1.0f,3.0f)
+
+        val ardisik  = AnimatorSet().apply {
+            duration = 2000
+           playSequentially(a,sX,sY) // Yanda belirtilen sırayla çalıştırılır.
+        }
+        ardisik.start()
+    }
 
 
 
